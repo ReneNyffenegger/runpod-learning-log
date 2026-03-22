@@ -11,7 +11,7 @@ First, it defines the names for
 
 A *docker image* is
 - [built](build-docker-image) from [this `Dockerfile`](Dockerfile)
-- [tested locally](test-docker-image-locally) (with [this input](test_input.json) and
+- [tested locally](test-docker-image-locally) (with [this input](test_input.json)) and
 - [pushed](push-docker-image) to [docker hub](https://hub.docker.com/repository/docker/renenyffenegger/runpod-hello-world) (make sure `docker login` was executed).
 
 The essential part of the docker image is [this handler python script](handler.py).
