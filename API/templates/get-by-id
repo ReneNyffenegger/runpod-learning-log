@@ -1,0 +1,5 @@
+# Variables that need to be defined when script is run:
+#   - templateId=‥
+
+curl -sS $APIROOT/templates/$template_id -H "Authorization: Bearer $RUNPOD_API_KEY"
+

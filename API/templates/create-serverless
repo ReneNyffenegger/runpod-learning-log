@@ -1,0 +1,35 @@
+serverless=true  # false for PODs
+volumeGB=-1                            #  Serverless templates do not support volumeInGb. -> set to -1
+
+# Variables that need to be defined when script is run:
+#   - dockerImage=‥
+#   - templateName=‥
+#   - containerGB=50
+#   - dockerAuthId=‥                         #  See ../templates/list
+
+entryPoint=''
+startCmd=''
+
+curl -sS $APIROOT/templates                    \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA | jq
+{
+  "imageName"              : "$dockerImage",
+  "name"                   : "$templateName",
+  "isServerless"           :  $serverless,
+  "isPublic"               :  false,
+  "category"               : "NVIDIA",
+  "containerRegistryAuthId": "$dockerAuthId",
+  "volumeInGb"             : $volumeGB,
+  "volumeMountPath"        : "/workspace",
+  "containerDiskInGb"      :  $containerGB,
+  "dockerEntrypoint"       : [$entryPoint],
+  "dockerStartCmd"         : [$startCmd],
+  "ports"                  : ["8888/http", "22/tcp"],
+  "env": {
+    "MODEL": "ginger-one"
+  },
+  "readme"                 : ""
+}
+DATA

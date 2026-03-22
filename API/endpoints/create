@@ -1,0 +1,37 @@
+# Variables that need to be defined when script is run:
+#   - templateId=‥         # see ../templates/create-serverless
+#   - name=‥
+#   - minCudaVersion=‥
+#   - gpuTypes= ‥          # For example: '"NVIDIA RTX 2000 Ada Generation"' (Separate multiple gpu types with comma)
+
+scalerType=QUEUE_DELAY     # Or REQUEST_COUNT
+flashBoot=false            # created name ends in -fb if flashBoot = true
+
+# TODO:
+#  "networkVolumeId" : "<string>",
+#  "networkVolumeIds": [ "<string>" ],
+#  "allowedCudaVersions": [ "13.0" ],
+
+curl -sS $APIROOT/endpoints                    \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA     | jq
+{
+  "templateId"        : "$template_id",
+  "computeType"       : "GPU",
+  "cpuFlavorIds"      : [ "cpu3c" ],
+  "dataCenterIds"     : [ "EU-RO-1", "CA-MTL-1", "EU-SE-1", "US-IL-1", "EUR-IS-1", "EU-CZ-1", "US-TX-3", "EUR-IS-2", "US-KS-2", "US-GA-2", "US-WA-1", "US-TX-1", "CA-MTL-3", "EU-NL-1", "US-TX-4", "US-CA-2", "US-NC-1", "OC-AU-1", "US-DE-1", "EUR-IS-3", "CA-MTL-2", "AP-JP-1", "EUR-NO-1", "EU-FR-1", "US-KS-3", "US-GA-1" ],
+  "executionTimeoutMs":  600000,
+  "flashboot"         :  $flashBoot,
+  "gpuCount"          :  1,
+  "gpuTypeIds"        : [ $gpuTypes],
+  "idleTimeout"       :  5,
+  "minCudaVersion"    : "13.0",
+  "name"              : "$name",
+  "scalerType"        : "$scalerType",
+  "scalerValue"       :  4,
+  "vcpuCount"         :  2,
+  "workersMax"        :  3,
+  "workersMin"        :  0
+}
+DATA
