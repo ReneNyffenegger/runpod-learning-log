@@ -1,0 +1,29 @@
+containerGB=50
+volumeGB=-1       #  Serverless templates do not support volumeInGb. -> set to -1
+
+templateId=$(curl -sS https://rest.runpod.io/v1/templates   \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA     | jq -r .id
+{
+  "imageName"              : "$dockerImageName",
+  "name"                   : "$templateName",
+  "isServerless"           :  true, 
+  "isPublic"               :  false,
+  "category"               : "NVIDIA",
+  "volumeInGb"             :  $volumeGB,
+  "volumeMountPath"        : "/workspace",
+  "containerDiskInGb"      :  $containerGB,
+  "dockerEntrypoint"       : [],
+  "dockerStartCmd"         : [],
+  "ports"                  : ["8888/http", "22/tcp"],
+  "env": {
+    "ENV_VAR_1": "value one",
+    "ENV_VAR_2": "value two"
+  },
+  "readme"                 : ""
+}
+DATA
+)
+
+echo crated template with id $templateId

@@ -1,0 +1,26 @@
+endpointId=$(curl -sS https://rest.runpod.io/v1/endpoints \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA     | jq -r .id
+{
+  "templateId"        : "$templateId",
+  "computeType"       : "GPU",
+  "cpuFlavorIds"      : [ "cpu3c" ],
+  "dataCenterIds"     : [ "EU-RO-1", "CA-MTL-1", "EU-SE-1", "US-IL-1", "EUR-IS-1", "EU-CZ-1", "US-TX-3", "EUR-IS-2", "US-KS-2", "US-GA-2", "US-WA-1", "US-TX-1", "CA-MTL-3", "EU-NL-1", "US-TX-4", "US-CA-2", "US-NC-1", "OC-AU-1", "US-DE-1", "EUR-IS-3", "CA-MTL-2", "AP-JP-1", "EUR-NO-1", "EU-FR-1", "US-KS-3", "US-GA-1" ],
+  "executionTimeoutMs":  600000,
+  "flashboot"         :  false,
+  "gpuCount"          :  1,
+  "gpuTypeIds"        : [ "NVIDIA RTX 2000 Ada Generation" ],
+  "idleTimeout"       :  5,
+  "minCudaVersion"    : "12.0",
+  "name"              : "$endpointName",
+  "scalerType"        : "QUEUE_DELAY",
+  "scalerValue"       :  4,
+  "vcpuCount"         :  2,
+  "workersMax"        :  3,
+  "workersMin"        :  0
+}
+DATA
+)
+
+echo created endpoint with id $endpointId

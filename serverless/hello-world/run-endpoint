@@ -1,0 +1,38 @@
+result=$(curl -sS https://api.runpod.ai/v2/$endpointId/run \
+  -H  'Content-Type: application/json'        \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY" \
+  -d @- <<DATA
+{ "input":{
+     "name": "René",
+     "val1":  2     ,
+     "val2":  3
+  }
+}
+DATA
+)
+
+status=$(echo $result | jq -r .status)
+jobId=$(echo $result | jq -r .id)
+echo jobId = $jobId
+
+while  [ $status = IN_QUEUE -o $status = IN_PROGRESS ]; do
+ #
+ # Wait for job to finish
+ #
+   sleep 5
+
+   result=$(curl -sS https://api.runpod.ai/v2/$endpointId/status/$jobId -H "Authorization: Bearer $RUNPOD_API_KEY")
+   status=$(echo $result | jq -r .status)
+
+   echo status=$status
+done
+
+if [ $status = COMPLETED ]; then
+ #
+ # Print result
+ #
+   echo $result | jq .output
+else
+   echo status = $status
+   echo $result
+fi
