@@ -1,3 +1,8 @@
-# Variables that need to be defined when script is run:
-#   - endpointId=‥
-curl -sS -X DELETE $APIROOT/endpoints/$endpointId -H "Authorization: Bearer $RUNPOD_API_KEY"
+if [ -z "$1" ]; then
+  echo "Usage: $0 <endpointId>"
+  exit 1
+fi
+
+endpointId="$1"
+
+curl -sS -X DELETE "$APIROOT/endpoints/$endpointId" -H "Authorization: Bearer $RUNPOD_API_KEY"

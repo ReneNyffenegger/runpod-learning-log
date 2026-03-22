@@ -1,4 +1,8 @@
-# Variables that need to be defined when script is run:
-#   - templateId=‥
+if [ -z "$1" ]; then
+  echo "Usage: $0 <templateId>"
+  exit 1
+fi
 
-curl -sS -X DELETE $APIROOT/templates/$templateId -H "Authorization: Bearer $RUNPOD_API_KEY"
+templateId="$1"
+
+curl -sS -X DELETE "$APIROOT/templates/$templateId" -H "Authorization: Bearer $RUNPOD_API_KEY"
