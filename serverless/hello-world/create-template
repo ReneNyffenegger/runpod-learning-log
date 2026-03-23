@@ -26,4 +26,4 @@ templateId=$(curl -sS https://rest.runpod.io/v1/templates   \
 DATA
 )
 
-echo crated template with id $templateId
+echo created template with id $templateId
