@@ -1,0 +1,17 @@
+if [ -z "$1" ]; then
+   echo "A password must be provided"
+   return
+fi
+
+password="$1"
+
+curl -sS -X POST "$APIROOT/containerregistryauth" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $RUNPOD_API_KEY" \
+  -d @"-" <<DATA | jq
+{
+   "name"    : "Renes docker hub",
+   "password": "$password",
+   "username": "renenyffenegger"
+}
+DATA
