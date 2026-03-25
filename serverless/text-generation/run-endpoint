@@ -1,0 +1,36 @@
+model=$1    # Model must be listed on https://huggingface.co/models
+shift
+prompt=$*
+
+result=$(curl -sS https://api.runpod.ai/v2/$endpointId/run \
+  -H  'Content-Type: application/json'        \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY" \
+  -d @- <<DATA
+{ "input": {
+   "prompt"  : "$prompt",
+   "model"   : "$model"  ,
+   "HF_TOKEN": "$HF_TOKEN"
+}}
+DATA
+)
+
+status=$(echo $result | jq -r .status)
+jobId=$( echo $result | jq -r .id)
+echo jobId = $jobId
+
+while  [ $status = IN_QUEUE -o $status = IN_PROGRESS ]; do
+ # Wait for job to finish
+   sleep 5
+   result=$(curl -sS https://api.runpod.ai/v2/$endpointId/status/$jobId -H "Authorization: Bearer $RUNPOD_API_KEY")
+   status=$(echo $result | jq -r .status)
+   echo $status
+done
+
+if [ $status = COMPLETED ]; then
+   echo "delayTime:     $(echo $result | jq -r .delayTime)"
+   echo "executionTime: $(echo $result | jq -r .executionTime)"
+   echo $result | jq -r .output.result
+else
+   echo status = $status
+   echo $result
+fi
