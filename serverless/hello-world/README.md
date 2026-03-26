@@ -1,5 +1,7 @@
 # Hello World for runpod Serverless
 
+An attempt to create a *Hello World* app for [runpod Serverless](..).
+
 ## go.sh
 
 [`go.sh`](go.sh) runs the entire cycle.
