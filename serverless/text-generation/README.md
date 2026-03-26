@@ -17,7 +17,7 @@ This observation is backed by the documentation: [Best practices for handler fun
 
 ### Unable to run MiniMax M2.5
 
-I unsuccessfully tried to run the app with the [MiniMaxAI/MiniMax-M2.5](https://github.com/ReneNyffenegger/runpod-learning-log/blob/458f381bd3c50d633c7f2a393ecc7f718d5482f1/serverless/text-generation/go.sh#L61).
+I unsuccessfully tried to run the app with the [MiniMaxAI/MiniMax-M2.5](https://github.com/ReneNyffenegger/runpod-learning-log/blob/458f381bd3c50d633c7f2a393ecc7f718d5482f1/serverless/text-generation/go.sh#L61) model.
 
 First, it failed because I didn't install `accelerate` with pip in the [`Dockerfile`](Dockerfile):
 
