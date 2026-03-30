@@ -4,6 +4,8 @@
 
 A [container registry auth](containerregistryauth) stores the credentials necessary to connect to a private Docker registry.
  
-[Templates](templates) save Pod and endpoint configurations so that they can be reused.
+[Templates](templates) save pod and endpoint configurations so that they can be reused.
 
 (Serverless) [endpoints](endpoints) are containerized applications.
+
+[Pods](pods).
