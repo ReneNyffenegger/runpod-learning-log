@@ -1,0 +1,1 @@
+curl -sS $APIROOT/templates?includeRunpodTemplates=true -H "Authorization: Bearer $RUNPOD_API_KEY" | jq -r '.[] | [.name, .imageName] | @tsv ' | column -t -s$'\t' | sort
