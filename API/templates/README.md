@@ -11,7 +11,10 @@ Some experiments with the `template` [Runpod API](..).
 [`list-runpod`](list-runpod) lists runpod templates by setting the query parameter `includeRunpodTemplates` to `true` and returns the runpods' `name` and `imageName` attributes
 as a «table».
 
-See also [runpod's images on dockerhub](https://hub.docker.com/u/runpod) and [runpod's `containers` repository on github](https://github.com/runpod/containers).
+See also
+- [Pod templates in the runpod console](https://console.runpod.io/hub?tabSelected=templates),
+- [runpod's images on dockerhub](https://hub.docker.com/u/runpod) and
+- [runpod's `containers` repository on github](https://github.com/runpod/containers).
 
 ## get-by-id
 
