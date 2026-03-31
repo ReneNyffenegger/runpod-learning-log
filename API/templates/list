@@ -3,4 +3,5 @@
 includeRunpodTemplates=false
 isServerless=true
 
-curl -sS "$APIROOT/templates?includeRunpodTemplates=$includeRunpodTemplates&isServerless=$isServerless" -H "Authorization: Bearer $RUNPOD_API_KEY" | jq
+  curl -sS "$APIROOT/templates?includeRunpodTemplates=$includeRunpodTemplates&isServerless=$isServerless" -H "Authorization: Bearer $RUNPOD_API_KEY" | jq
+# curl -sS $APIROOT/templates?includeRunpodTemplates=true                                               -H "Authorization: Bearer $RUNPOD_API_KEY" | jq

@@ -1,0 +1,6 @@
+if [ -z "$1" ]; then
+  echo "Error: No template name supplied" >&2
+  exit 1
+fi
+name="$1"
+curl -sS "$APIROOT/templates?includeRunpodTemplates=true" -H "Authorization: Bearer $RUNPOD_API_KEY" | jq -r --arg name "$name" '.[] | select(.name == $name).readme'
