@@ -1,2 +1,2 @@
 . create-pod
-. ../../api/show-ssh-connection-details
+. ../../API/show-ssh-connection-details

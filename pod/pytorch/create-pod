@@ -1,4 +1,4 @@
-. ../../api/pods/create-from-json-body "$(cat <<DATA
+. ../../API/pods/create-from-json-body "$(cat <<DATA
 {
   "name"         : "Ubuntu with torch",
   "imageName"    : "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
