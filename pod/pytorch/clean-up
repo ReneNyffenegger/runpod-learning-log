@@ -1,0 +1,1 @@
+curl -sS -X DELETE https://rest.runpod.io/v1/pods/$podId -H "Authorization: Bearer $RUNPOD_API_KEY"

@@ -1,0 +1,42 @@
+json_body="$1"
+
+toggle=0       # used to print $error in alternating colors in the following loops
+while true; do # Loop until an instance becomes available
+
+   podDescr=$(curl -sS https://rest.runpod.io/v1/pods \
+    -H  'Content-Type: application/json'         \
+    -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+    -d "$json_body" | jq
+)
+
+ #
+ # Testing if .id is present because 'jq -r .id' evaluates to null, not "",
+ # if .id is not present.
+ #
+   if echo "$podDescr" | jq -e 'has("id")' > /dev/null 2>&1; then
+      podId=$(echo $podDescr | jq -r .id)
+      break
+   fi
+
+   error=$(echo $podDescr | jq -r .error)
+
+   if [ "$error" = "create pod: There are no instances currently available" ]; then
+
+      if [ $((toggle % 2)) -eq 0 ]; then
+          echo -ne "\e[38;5;250m$error, sleeping for 1 second ‥\e[0m\r"  # Light grey
+      else
+          echo -ne "\e[38;5;240m$error, sleeping for 1 second ‥\e[0m\r"  # Dark grey
+      fi
+      toggle=$((toggle + 1))
+      sleep 1
+      continue
+   fi
+
+   echo "Unexpected response:"
+   echo "$podDescr" | jq
+   return
+
+done
+
+# Clear the $error line after breaking out of loop
+echo -ne "\r\e[K"

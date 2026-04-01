@@ -1,0 +1,12 @@
+. ../../API/pods/create-from-json-body "$(cat <<DATA
+{
+  "templateId"  : "$templateId",
+  "cloudType"   : "SECURE",
+  "computeType" : "GPU",
+  "gpuTypeIds"  :["NVIDIA RTX 2000 Ada Generation"],
+  "ports"       :["22/tcp"]
+}
+DATA
+)"
+
+echo -e "\e[32mPod      with id\e[0m \e[33m$podId\e[0m \e[32mwas created\e[0m"

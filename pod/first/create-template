@@ -1,0 +1,20 @@
+containerGB=5
+
+templateId=$(curl -sS https://rest.runpod.io/v1/templates \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA | jq -r .id
+{
+  "imageName"              : "$dockerImageName",
+  "name"                   : "$templateName",
+  "isServerless"           :  false,
+  "isPublic"               :  false,
+  "category"               : "NVIDIA",
+  "containerDiskInGb"      :  $containerGB,
+  "volumeMountPath"        : "/workspace",
+  "ports"                  : ["22/tcp"]
+}
+DATA
+)
+
+echo -e "\e[32mTemplate with id\e[0m \e[33m$templateId\e[0m \e[32m    was created\e[0m"

@@ -1,0 +1,34 @@
+waitMsg='Waiting for connection data'
+
+toggle=0        # used to print $waitMsg in alternating colors in the following lop
+while true; do
+    response=$(curl -sS https://rest.runpod.io/v1/pods/$podId -H "Authorization: Bearer $RUNPOD_API_KEY")
+    ip=$(echo "$response" | jq -r '.publicIp')
+    if [[ -n "$ip" && "$ip" != "null" ]]; then
+        break
+    else
+      # Alternate between two greys using 256-color ANSI escape codes
+        if [ $((toggle % 2)) -eq 0 ]; then
+            echo -ne "\e[38;5;250m$waitMsg\e[0m\r"  # Light grey
+        else
+            echo -ne "\e[38;5;240m$waitMsg\e[0m\r"  # Dark grey
+        fi
+        toggle=$((toggle + 1))
+        sleep 1
+    fi
+done
+
+# Clear the $waitMsg line after breaking out of loop
+echo -ne "\r\e[K"
+
+port=$(echo "$response" | jq -r '.portMappings."22"')
+
+#
+#  Write the ssh connection string.
+#  Use
+#     -o StrictHostKeyChecking=no       to prevent asking "Are you sure you want to continue connecting (yes/no/[fingerprint])?"
+#     -o UserKnownHostsFile=/dev/null   to avoid saving the host key in known_hosts
+#
+echo ''
+
+echo -e "\e[38;5;117mssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $port root@$ip -i ~/.ssh/id_ed25519e[0m"
