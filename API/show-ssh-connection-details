@@ -31,4 +31,4 @@ port=$(echo "$response" | jq -r '.portMappings."22"')
 #
 echo ''
 
-echo -e "\e[38;5;117mssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $port root@$ip -i ~/.ssh/id_ed25519e[0m"
+echo -e "\e[38;5;117mssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $port root@$ip -i ~/.ssh/id_ed25519\e[0m"
