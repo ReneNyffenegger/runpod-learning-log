@@ -6,7 +6,7 @@ The goal of this test was test how an image with
 
 ### go.sh
 
-[`go.sh`](go.sh) is the script that calls most the scripts below in the correct order to create docker image,
+[`go.sh`](go.sh) is the script that calls most of the scripts below in the correct order to create docker image,
 template and pod.
 
 ### create-pod
