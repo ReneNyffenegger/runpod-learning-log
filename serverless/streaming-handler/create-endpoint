@@ -1,0 +1,15 @@
+endpointId=$(curl -sS https://rest.runpod.io/v1/endpoints \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA     | jq -r .id
+{
+  "templateId"        : "$templateId",
+  "cpuFlavorIds"      : [ "cpu3c" ],
+  "computeType"       : "CPU",
+  "name"              : "$endpointName",
+  "scalerType"        : "QUEUE_DELAY"
+}
+DATA
+)
+
+echo created endpoint with id $endpointId

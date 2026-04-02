@@ -4,6 +4,8 @@
 
 [Hello world](hello-world)
 
+[Streaming handler](streaming-handler) demonstrates a streaming hanlder, which allows to return a (potentially large) result to the client in multiple pieces.
+
 [Text generation](text-generation)
 
 ## Serverless handler function

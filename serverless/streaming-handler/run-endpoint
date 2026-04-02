@@ -1,0 +1,45 @@
+result=$(curl -sS https://api.runpod.ai/v2/$endpointId/run \
+   -H 'Content-Type: application/json' \
+   -H "Authorization: Bearer $RUNPOD_API_KEY" \
+   -d @- <<DATA
+{
+   "input": {
+      "pieces": 10
+   }
+}
+DATA
+)
+
+status=$(echo $result | jq -r .status)
+jobId=$( echo $result | jq -r .id)
+echo "jobId = $jobId"
+
+while [ "$status" != COMPLETED -a "$status" != FAILED -a "$status" != TIMED_OUT -a "$status" != CANCELLED ]; do
+
+   result=$(curl -sS https://api.runpod.ai/v2/$endpointId/stream/$jobId -H "Authorization: Bearer $RUNPOD_API_KEY")
+   status=$(echo $result | jq -r .status)
+
+   if [ "$status" = IN_QUEUE ]; then
+         sleep 1
+
+   elif [ "$status" = IN_PROGRESS ]; then
+ 
+        output=$(echo $result | jq    .stream[0].output) # Only first index, because we assume that we fetch fast enough
+        piece=$( echo $output | jq    .piece           )
+        ts=$(    echo $output | jq -r .timestamp       )
+
+
+        echo "$piece - $ts"
+
+   elif [ "$status" = COMPLETED -o "$status" = FAILED -o "$status" = TIMED_OUT -o "$status" = CANCELLED ]; then
+        break
+   else
+       echo "Unknown status $status"
+       break
+   fi
+
+done
+
+if [ $status != COMPLETED ]; then
+   echo "$status = $status"
+fi
