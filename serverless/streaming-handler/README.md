@@ -1,4 +1,4 @@
-# Streaming hanlder for Runpod Serverless
+# Streaming handler for Runpod Serverless
 
 Setting [`return_aggregate_stream`](https://github.com/ReneNyffenegger/runpod-learning-log/blob/f5a28169370bc15be6500b75891723ac9f2ed9d7/serverless/streaming-handler/handler.py#L16) to `True`
  in [`runpod.serverless.start()`](https://github.com/ReneNyffenegger/runpod-learning-log/blob/f5a28169370bc15be6500b75891723ac9f2ed9d7/serverless/streaming-handler/handler.py#L14) enables output aggregation for streaming handlers.
