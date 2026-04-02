@@ -1,6 +1,7 @@
-dockerImageName=renenyffenegger/runpod-hello-world:latest
-templateName=hello-world-template
-endpointName=hello-world-endpoint
+exampleName=hello-world
+dockerImageName=renenyffenegger/runpod-serverless-$exampleName:latest
+templateName=$exampleName-template
+endpointName=$exampleName-world-endpoint
 
 . build-docker-image
 . test-docker-image-locally
