@@ -1,2 +1,2 @@
-docker buildx build --platform linux/amd64 --build-arg ENV_VAR_VAL='This value was set in build-docker-image when the docker image was created' -t $dockerImageName .
-docker push $dockerImageName
+docker buildx build -q --platform linux/amd64 --build-arg ENV_VAR_VAL='This value was set in build-docker-image when the docker image was created' -t $dockerImageName .
+docker push -q $dockerImageName
