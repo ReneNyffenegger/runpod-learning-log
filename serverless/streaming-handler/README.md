@@ -2,7 +2,7 @@
 
 The handler function can return a result in pieces by using [`yield`](https://github.com/ReneNyffenegger/runpod-learning-log/blob/4e0a0f8f56b8b6c2628ee290497a1dbb841bb93c/serverless/streaming-handler/handler.py#L11).
 
-In such a scenario, streamed pieces can be collected from the `/stream` API.
+In such a scenario, streamed pieces can be collected from the [`/stream`](https://github.com/ReneNyffenegger/runpod-learning-log/blob/a8d4f933d033072bc984fc86a1050709fba18aae/serverless/streaming-handler/run-endpoint#L19) API.
 
 It is intended for generator functions that use yield to produce incremental results (e.g., streaming token-by-token output from a large language model).
 
