@@ -1,6 +1,16 @@
 # Runpod REST API examples
 
-[API Reference overview](https://docs.runpod.io/api-reference/overview)
+[API Reference overview](https://docs.runpod.io/api-reference/overview).
+
+The operation reference documents additional APIs (located at `https://api.runpod.ai/v2` rather than `https://rest.runpod.io/v1`) such as
+- [`/runsync`](https://docs.runpod.io/serverless/endpoints/operation-reference#/runsync)
+- [`/run`](https://docs.runpod.io/serverless/endpoints/operation-reference#/run)
+- [`/status`](https://docs.runpod.io/serverless/endpoints/operation-reference#/status)
+- [`/stream`](https://docs.runpod.io/serverless/endpoints/operation-reference#/stream)
+- [`/cancel`](https://docs.runpod.io/serverless/endpoints/operation-reference#/cancel)
+- [`/retry`](https://docs.runpod.io/serverless/endpoints/operation-reference#/retry)
+- [`/purge-queue`](https://docs.runpod.io/serverless/endpoints/operation-reference#/purge-queue)
+- [`/health`](https://docs.runpod.io/serverless/endpoints/operation-reference#/health)
 
 A [container registry auth](containerregistryauth) stores the credentials necessary to connect to a private Docker registry.
  
