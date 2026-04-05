@@ -13,5 +13,5 @@ def streamer(job):
 
 runpod.serverless.start({
     "handler"                : streamer,
-    "return_aggregate_stream": True      # ← This!
+    "return_aggregate_stream": True      # If set to True, aggregated output can be queried also with /run or /runsync
 })
