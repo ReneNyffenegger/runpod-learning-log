@@ -28,7 +28,6 @@ while [ "$status" != COMPLETED -a "$status" != FAILED -a "$status" != TIMED_OUT 
         piece=$( echo $output | jq    .piece           )
         ts=$(    echo $output | jq -r .timestamp       )
 
-
         echo "$piece - $ts"
 
    elif [ "$status" = COMPLETED -o "$status" = FAILED -o "$status" = TIMED_OUT -o "$status" = CANCELLED ]; then
