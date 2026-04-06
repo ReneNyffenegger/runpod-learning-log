@@ -1,0 +1,17 @@
+templateId=$(curl -sS https://rest.runpod.io/v1/templates   \
+  -H  'Content-Type: application/json'         \
+  -H  "Authorization: Bearer $RUNPOD_API_KEY"  \
+  -d @- <<DATA     | jq -r .id
+{
+  "imageName"              : "$dockerImageName",
+  "name"                   : "$templateName",
+  "isServerless"           :  true, 
+  "isPublic"               :  false,
+  "containerDiskInGb"      :  10,
+  "category"               : "CPU",
+  "volumeInGb"             :  -1
+}
+DATA
+)
+
+echo created template with id $templateId
