@@ -4,7 +4,7 @@
 
 [Hello world](hello-world)
 
-[Multiple requests(multiple-request) show how a singe serverless container can handle many `/run` calls in sequence and keep state between them.
+[Multiple requests](multiple-request) show how a singe serverless container can handle many `/run` calls in sequence and keep state between them.
 
 [Streaming handler](streaming-handler) demonstrates a streaming hanlder, which allows to return a (potentially large) result to the client in multiple pieces.
 
