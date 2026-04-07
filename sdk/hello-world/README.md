@@ -3,7 +3,7 @@
 This *hello world* example tries to demonstrate the basics of the [Runpod SDK](..).
 
 It uses the same [Docker image](https://hub.docker.com/r/renenyffenegger/runpod-serverless-hello-world) as also
-the [serverless hello world example][../../serverless/hello-world].
+the [serverless hello world example](../../serverless/hello-world).
 
 ## Observersions
 
