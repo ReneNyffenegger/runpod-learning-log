@@ -1,1 +1,1 @@
-docker buildx build --platform linux/amd64 --build-arg ENV_VAR_VAL='This value was set in build-docker-image when the docker image was created' -t $dockerImageName .
+docker buildx build -q --build-arg ENV_VAR_VAL='This value was set in build-docker-image when the docker image was created' -t $dockerImageName .
